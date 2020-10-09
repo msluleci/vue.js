@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue Example</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="stylesheet" href="https://semantic-ui.com/dist/semantic.css" />
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <script src="https://semantic-ui.com/dist/semantic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+
+    <style>
+        [v-cloak]>* {
+            display: none;
+        }
+        
+        [v-cloak]::before {
+            content: "loading…";
+        }
+        
+        body>div.container:first-of-type {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="ui container" v-cloak>
+        <div class="row">
+            <div class="one wide column">
+                <div class="ui link cards">
+                    <user-card v-for="(personitem, i) in people" :usernumber="i" :color="'a'" :userinfo="personitem" :key="personitem.id" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        Vue.component(
+            'user-card', {
+                template: `
+                <div class="card">
+                    <div class="content">
+                        <slot >
+                        <p>Name: {{ userinfo.name }}</p>
+                        <p>Job: {{ userinfo.job }}</p>
+                        <p>City: {{ userinfo.city }}</p>
+                        <p>Number: {{ usernumber }}</p>
+                        <p>renk: {{ color }}</p>
+
+                        </slot>
+                    </div>
+                </div>`,
+                props: ['userinfo', 'usernumber', 'color'],
+
+            },
+        );
+
+        const a = 'sarı'
+
+        new Vue({
+            el: '#app',
+            data: {
+                a: a,
+                people: [{
+                    id: 1,
+                    name: 'Molly Hess',
+                    job: 'Personal Assistant',
+                    city: 'Paris'
+
+                }, {
+                    id: 4,
+                    name: 'Mert',
+                    job: 'Film-maker',
+                    city: 'New York'
+                }, {
+                    id: 6,
+                    name: 'Mert',
+                    job: 'Film-maker',
+                    city: 'New York'
+                }, {
+                    id: 2,
+                    name: 'Matthew Giampietro',
+                    job: 'Film-maker',
+                    city: 'New York'
+                }, {
+                    id: 3,
+                    name: 'Elyse Ossi',
+                    job: 'Copywriter',
+                    city: 'New York'
+                }]
+            }
+        });
+    </script>
+
+</body>
+
+</html>
